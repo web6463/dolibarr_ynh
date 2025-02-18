@@ -156,7 +156,10 @@ sudo visudo -c
 # Change ownership of the file to dolibarr after creation
 sudo chown dolibarr:dolibarr /usr/local/bin/syncyunohost.sh
 sudo chmod 750 /usr/local/bin/syncyunohost.sh
-sudo -u www-data php /var/www/dolibarr/htdocs/admin/modules.php activate member
+sudo chown -R dolibarr:www-data /var/www/dolibarr/
+sudo chmod -R 750 /var/www/dolibarr/
+
+sudo -u dolibarr php /var/www/dolibarr/htdocs/admin/modules.php activate member
 ynh_script_progression --message="Modules installed and activated!" --weight=10
 #=================================================
 # END OF SCRIPT
