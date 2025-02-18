@@ -121,7 +121,7 @@ then
     sed -i "s/{{syncyunohost_old_members}}/$syncyunohost_old_members/g" ../conf/sql/syncyunohost.sql
     sed -i "s/{{syncyunohost_main_group}}/$syncyunohost_main_group/g" ../conf/sql/syncyunohost.sql
     sed -i "s/{{syncyunohost_base_domain}}/$syncyunohost_base_domain/g" ../conf/sql/syncyunohost.sql
-    ynh_mysql_connect_as --user="$db_name" --password="$db_pwd" --database="$db_name" < ../conf/sql/syncyunohost.sql
+    # ynh_mysql_connect_as --user="$db_name" --password="$db_pwd" --database="$db_name" < ../conf/sql/syncyunohost.sql
 else
     ynh_script_progression --message="SyncYunohost module is disabled." --weight=1
 fi
@@ -156,6 +156,8 @@ sudo visudo -c
 # Change ownership of the file to dolibarr after creation
 sudo chown dolibarr:dolibarr /usr/local/bin/syncyunohost.sh
 sudo chmod 750 /usr/local/bin/syncyunohost.sh
+sudo -u www-data php /var/www/dolibarr/htdocs/admin/modules.php activate member
+ynh_script_progression --message="Modules installed and activated!" --weight=10
 #=================================================
 # END OF SCRIPT
 #=================================================
