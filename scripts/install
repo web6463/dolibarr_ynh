@@ -159,8 +159,20 @@ sudo chmod 750 /usr/local/bin/syncyunohost.sh
 sudo chown -R dolibarr:www-data /var/www/dolibarr/
 sudo chmod -R 750 /var/www/dolibarr/
 
-sudo -u dolibarr php /var/www/dolibarr/htdocs/admin/modules.php activate member
-ynh_script_progression --message="Modules installed and activated!" --weight=10
+#=================================================
+# ENABLE MODULE IN DOLIBARR
+#=================================================
+ynh_script_progression --message="Activating Dolibarr module..." --weight=1
+
+# اجرای دستور برای فعال کردن ماژول موردنظر
+php "$install_dir/htdocs/admin/modules.php" activate syncyunohost
+
+# بررسی وضعیت فعال‌سازی
+if [ $? -eq 0 ]; then
+    ynh_print_info --message="Module activated successfully!"
+else
+    ynh_print_warn --message="Module activation failed. Please check logs."
+fi
 #=================================================
 # END OF SCRIPT
 #=================================================
