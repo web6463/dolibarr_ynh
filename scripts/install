@@ -164,15 +164,8 @@ sudo chmod -R 750 /var/www/dolibarr/
 #=================================================
 ynh_script_progression --message="Activating Dolibarr module..." --weight=1
 
-# اجرای دستور برای فعال کردن ماژول موردنظر
-php "$install_dir/htdocs/admin/modules.php" activate syncyunohost
+php "$install_dir/htdocs/scripts/moduletools.php" -a enable -m syncyunohost
 
-# بررسی وضعیت فعال‌سازی
-if [ $? -eq 0 ]; then
-    ynh_print_info --message="Module activated successfully!"
-else
-    ynh_print_warn --message="Module activation failed. Please check logs."
-fi
 #=================================================
 # END OF SCRIPT
 #=================================================
