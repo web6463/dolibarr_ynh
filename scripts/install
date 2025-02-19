@@ -160,13 +160,6 @@ sudo chown -R dolibarr:www-data /var/www/dolibarr/
 sudo chmod -R 750 /var/www/dolibarr/
 
 #=================================================
-# ENABLE MODULE IN DOLIBARR
-#=================================================
-ynh_script_progression --message="Activating Dolibarr module..." --weight=1
-
-php "$install_dir/htdocs/scripts/moduletools.php" -a enable -m syncyunohost
-
-#=================================================
 # END OF SCRIPT
 #=================================================
 
