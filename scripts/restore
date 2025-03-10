@@ -52,6 +52,11 @@ ynh_systemd_action --service_name="php$phpversion-fpm" --action=reload
 ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
+# Install Syncyunohost Scripts
+#=================================================
+syncyunohost_scripts_install
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
