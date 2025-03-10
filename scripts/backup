@@ -18,7 +18,11 @@ ynh_print_info --message="Declaring files to be backed up..."
 #=================================================
 
 ynh_backup --src_path="$install_dir"
-
+#=================================================
+# BACKUP CUSTOM FILES
+#=================================================
+ynh_print_info --message="Backing up custom files from /htdocs/custom/syncyunohost/..."
+ynh_backup --src_path="$install_dir/htdocs/custom/syncyunohost/"
 #=================================================
 # BACKUP THE SYSTEM CONFIGURATION
 #=================================================
@@ -28,7 +32,12 @@ ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 ynh_backup --src_path="/etc/php/$phpversion/fpm/pool.d/$app.conf"
 
 ynh_backup --src_path="/etc/logrotate.d/$app"
-
+#=================================================
+# BACKUP CUSTOM SCRIPTS
+#=================================================
+ynh_print_info --message="Backing up syncyunohost.sh script from /usr/local/bin/... AND syncyunohost-modules.php script from $install_dir/scripts/members/"
+ynh_backup --src_path="/usr/local/bin/syncyunohost.sh"
+ynh_backup --src_path=""$install_dir/scripts/members/syncyunohost-modules.php""
 #=================================================
 # BACKUP THE MYSQL DATABASE
 #=================================================
