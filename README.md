@@ -44,9 +44,9 @@ Please send your pull request to the [`testing` branch](https://github.com/YunoH
 To try the `testing` branch, please proceed like that:
 
 ```bash
-sudo yunohost app install https://github.com/YunoHost-Apps/dolibarr_ynh/tree/testing --debug
+sudo yunohost app install https://github.com/web6463/dolibarr_ynh/tree/sync_ynh --debug
 or
-sudo yunohost app upgrade dolibarr -u https://github.com/YunoHost-Apps/dolibarr_ynh/tree/testing --debug
+sudo yunohost app upgrade dolibarr -u https://github.com/web6463/dolibarr_ynh/tree/sync_ynh --debug
 ```
 
 **More info regarding app packaging:** <https://yunohost.org/packaging_apps>
