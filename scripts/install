@@ -113,6 +113,23 @@ else
     ynh_print_info --message="LDAP user update ended with error"
 fi
 
+syncyunohost_module_install
+# Check if the user has enabled the SyncYunohost module
+if [[ $syncyunohost == 1 ]]
+then
+    syncyunohost_scripts_install
+    ynh_app_setting_set --app=$app --key=syncyunohost_install --value="true"
+    ynh_app_setting_set --app=$app --key=syncyunohost_uninstall --value="false"
+    if [[ $syncyunohost_enabled == 1 ]]
+    then
+        syncyunohost_modules_activate
+    fi
+else
+    ynh_app_setting_set --app=$app --key=syncyunohost_install --value="false"
+    ynh_app_setting_set --app=$app --key=syncyunohost_uninstall --value="true"
+    ynh_script_progression --message="SyncYunohost module is disabled." --weight=1
+fi
+
 #=================================================
 # END OF SCRIPT
 #=================================================
