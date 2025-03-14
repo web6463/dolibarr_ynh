@@ -46,15 +46,13 @@ syncyunohost_module_install(){
     ynh_script_progression --message="Copying syncyunohost folder to destination..." --weight=1
     
     # Check if source directory exists
-   # if [ -d "../sources/extra_files/app/syncyunohost/" ]; then
-    #    mkdir -p "$install_dir/htdocs/custom/syncyunohost/" # Ensure destination directory exists
-     #   cp -r "../sources/extra_files/app/syncyunohost/"* "$install_dir/htdocs/custom/syncyunohost/"
-      #  ynh_print_info --message="Files copied successfully to $install_dir/htdocs/custom/"
-  #  else
-  #      ynh_print_warn --message="Source directory ../sources/extra_files/app/syncyunohost/ does not exist. Skipping copy."
-  #  fi
-}
-syncyunohost_scripts_install(){
+    if [ -d "../sources/extra_files/app/syncyunohost/" ]; then
+        mkdir -p "$install_dir/htdocs/custom/syncyunohost/" # Ensure destination directory exists
+        cp -r "../sources/extra_files/app/syncyunohost/"* "$install_dir/htdocs/custom/syncyunohost/"
+        ynh_print_info --message="Files copied successfully to $install_dir/htdocs/custom/"
+    else
+        ynh_print_warn --message="Source directory ../sources/extra_files/app/syncyunohost/ does not exist. Skipping copy."
+    fi
     #=================================================
     # COPY SCRIPT TO /scripts/members
     #=================================================
