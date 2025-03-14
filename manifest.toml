@@ -41,21 +41,12 @@ ram.runtime = "150M"
     [install.init_main_permission]
     type = "group"
     default = "visitors"
-
-    [install.admin]
-    type = "user"
-    [install.syncyunohost]
-    ask.en = "Would you like to install the SyncYunohost module?"
-    ask.fr = "Would you like to install the SyncYunohost module?"
-    default = false
-    type = "boolean"
-    
+   
     [install.syncyunohost_enabled]
     type = "boolean"
     ask.en = "Would you like to enable the SyncYunohost module to synchronize Dolibarr members with YunoHost?"
     ask.fr = "Souhaitez-vous activer le module SyncYunohost pour synchroniser les membres dans Dolibarr avec  les utilisateurs de YunoHost?"
     default = false
-    visible = "syncyunohost"
     
     [install.syncyunohost_base_domain]
     type = "domain"
