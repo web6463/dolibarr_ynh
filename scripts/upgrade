@@ -108,12 +108,6 @@ ynh_use_logrotate --non-append
 # COPY FOLDER TO TARGET PATH
 #=================================================
 syncyunohost_module_install
-
-#=================================================
-# RESTORE CUSTOM SCRIPTS
-#=================================================
-syncyunohost_scripts_install
-
 #=================================================
 # END OF SCRIPT
 #=================================================
