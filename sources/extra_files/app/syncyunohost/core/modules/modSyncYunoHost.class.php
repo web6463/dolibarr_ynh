@@ -37,8 +37,8 @@ class modSyncYunoHost extends DolibarrModules
         );
 
         $this->dirs = array("/syncyunohost/temp");
-        $this->config_page_url = array("setup.php@syncyunohost");
-        $this->hidden = false;
+        $this->config_page_url = false;
+        $this->hidden = true;
         $this->depends = array();
         $this->requiredby = array();
         $this->conflictwith = array();
