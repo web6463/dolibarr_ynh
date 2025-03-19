@@ -26,8 +26,8 @@ name.fr = "SyncYunohost"
     visible = "syncyunohost_enabled"
     
     [main.syncyunohost.syncyunohost_old_members]
-    ask.en = "Should synchronization also include members who were created previously?"
-    ask.fr = "La synchronisation doit-elle également inclure les membres créés précédemment ?"
+    ask.en = "Do you want to synchronize the existing members?"
+    ask.fr = "Voulez-vous également synchroniser les membres existants ?"
     type = "boolean"
     yes = "true"
     no = "false"
