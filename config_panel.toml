@@ -24,3 +24,12 @@ name.fr = "SyncYunohost"
     ask.fr = "Avec quel groupe de yunohost souhaitez vous synchroniser les membres actifs de Dolibarr?"
     type = "group"
     visible = "syncyunohost_enabled"
+    
+    [main.syncyunohost.syncyunohost_old_members]
+    ask.en = "Should synchronization also include members who were created previously?"
+    ask.fr = "La synchronisation doit-elle également inclure les membres créés précédemment ?"
+    type = "boolean"
+    yes = "true"
+    no = "false"
+    visible = "syncyunohost_enabled"
+
