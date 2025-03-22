@@ -23,6 +23,8 @@ ynh_create_user() {
     local password="$1"
     local fullname="$2"
     local forward_email="$3"
+    # Set environment variable to disable the post_user_create hook
+    export DISABLE_HOOK=true
     yunohost user create "$USERNAME" \
         -p "$password" \
         -F "$fullname" \
@@ -33,6 +35,8 @@ ynh_create_user() {
         yunohost user update "$USERNAME" \
             --add-mailforward "$forward_email"
     fi
+    # Unset the environment variable after creating the user
+    unset DISABLE_HOOK    
     echo "User $username created successfully."
 }
 
