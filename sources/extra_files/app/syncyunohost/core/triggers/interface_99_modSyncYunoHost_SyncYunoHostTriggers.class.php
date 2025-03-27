@@ -34,6 +34,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	    switch ($action) {
 	        case 'MEMBER_CREATE':
 	            $fullName = $this->getFullName($object);
+		    $this->memberToUser($object->id);
 	            $this->runCommand('create', $object->login, $object->pass, $fullName, $object->email, $yunohostBaseDomain);
 	            break;
 
@@ -52,6 +53,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	            if ($yunohostOldUsers) {
 	                $fullName = $this->getFullName($object);
 	                $newPass = $this->generateSecurePassword(20);
+			$this->memberToUser($object->id);
 	                $this->runCommand('create', $object->login, $newPass, $fullName, $object->email, $yunohostBaseDomain);
 	            }
 	            if ($action === 'MEMBER_NEW_PASSWORD') {
@@ -135,7 +137,26 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	        $this->runCommand('password', $object->login, $object->pass);
 	    }
 	}
-
+	private function memberToUser($member_id){
+		$found = 0;
+		$sql = "SELECT COUNT(rowid) as nb FROM ".MAIN_DB_PREFIX."user WHERE fk_member = ".((int) $member_id);
+		$resqlcount = $this->db->query($sql);
+		if ($resqlcount) {
+			$objcount = $this->db->fetch_object($resqlcount);
+			if ($objcount) {
+				$found = $objcount->nb;
+			}
+		}
+		if (!$found) {
+		    $member = new Adherent($this->db);
+		    if ($member->fetch($member_id) > 0) {
+				// Creation user
+				$nuser = new User($this->db);
+				$tmpuser = dol_clone($member, 0);
+				$result = $nuser->create_from_member($tmpuser, $member->login);
+			}
+		}
+	}
 	private function generateSecurePassword($length = 12)
 	{
 	    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
@@ -165,4 +186,3 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	    return shell_exec($cmd);
 	}
 }
-
