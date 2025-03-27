@@ -135,7 +135,15 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	        $this->runCommand('password', $object->login, $object->pass);
 	    }
 	}
-
+	private function memberToUser($member_id){
+		$member = new Adherent($this->db);
+		if ($member->fetch($member_id) > 0) {
+			// Creation user
+			$nuser = new User($this->db);
+			$tmpuser = dol_clone($member, 0);
+			$result = $nuser->create_from_member($tmpuser, $member->login);
+		}
+	}
 	private function generateSecurePassword($length = 12)
 	{
 	    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
