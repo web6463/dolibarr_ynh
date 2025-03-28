@@ -28,7 +28,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	    // Retrieve YunoHost configuration values
 	    $yunohostBaseDomain = $conf->global->YUNOHOST_BASE_DOMAIN;
 	    $yunohostMainGroup = $conf->global->YUNOHOST_MAIN_GROUP;
-	    $yunohostOldUsers = $conf->global->YUNOHOST_OLD_MEMBERS;
+	    $yunohostOldUsers = 1;
 
 	    // Handle actions using a switch statement
 	    switch ($action) {
