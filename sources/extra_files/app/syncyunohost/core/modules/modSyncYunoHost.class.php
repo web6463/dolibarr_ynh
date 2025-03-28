@@ -80,6 +80,33 @@ class modSyncYunoHost extends DolibarrModules
     public function init($options = '')
     {
         global $conf, $langs;
+        // Initialize ExtraFields
+        require_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
+        $extrafields = new ExtraFields($this->db);
+
+        // Add extra field 'synced_with_yunohost' to members
+        $result1 = $extrafields->addExtraField(
+            'synced_with_yunohost',   // Field name
+            "Synced with YunoHost",   // Field label
+            'boolean',                // Field type
+            100,                        // Position
+            1,                        // Size
+            'adherent',               // Table (for members)
+            0,                        // Unique
+            0,                        // Required
+            0,                       // Default value
+            '',                       // No options
+            0,                        // Visible
+            '',                       // No specific page
+            0,                        // No indexing
+            0,                        // No encryption
+            '',                       // No field dependencies
+            '',                       // No filters
+            'syncyunohost@syncyunohost',      // Module name
+            'isModEnabled("syncyunohost")' // Condition for enabling
+        );
+        // Remove old permissions and reapply
+        $this->remove($options);        
         $sql = array();
         return $this->_init($sql, $options);
     }
