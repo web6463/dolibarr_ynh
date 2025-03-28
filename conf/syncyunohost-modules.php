@@ -21,7 +21,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 
 // Check if the required parameters are passed
 if ($argc < 2) { // Only checking if action is passed
-    echo "Usage: php script.php --action=<action> --modules=<modules> --base_domain=<domain> --main_group=<group> --old_members=<members>\n";
+    echo "Usage: php script.php --action=<action> --modules=<modules> --base_domain=<domain> --main_group=<group>\n";
     exit(1);
 }
 
@@ -30,7 +30,6 @@ $action = '';
 $modules = '';
 $base_domain = '';
 $main_group = '';
-$old_members = '';
 
 // Process command-line arguments
 foreach ($argv as $val) {
@@ -45,9 +44,6 @@ foreach ($argv as $val) {
     }
     if (preg_match('/--main_group=["\']?([^"\']+)["\']?$/', $val, $reg)) {
         $main_group = $reg[1];
-    }
-    if (preg_match('/--old_members=["\']?([^"\']+)["\']?$/', $val, $reg)) {
-        $old_members = $reg[1];
     }
 }
 
@@ -119,12 +115,6 @@ function syncyunohost_update_settings($db, $conf, $base_domain = null, $main_gro
                 $errors = true;
             }
         }
-        if (!empty($old_members)) {
-            if (dolibarr_set_const($db, 'YUNOHOST_OLD_MEMBERS', $old_members, 'chaine', 0, '', $conf->entity) < 0) {
-                $errors = true;
-            }
-        }
-
         if ($errors) {
             setEventMessages('ErrorFailedToSaveData', null, 'errors');
             $db->rollback();
