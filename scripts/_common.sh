@@ -97,8 +97,7 @@ syncyunohost_scripts_remove(){
 }
 syncyunohost_modules_activate(){
     ynh_script_progression --message="Active modAdherent,modCron,modSyncYunoHost ..." --weight=1
-    syncyunohost_old_members=${syncyunohost_old_members:-"no"}
-    php "$install_dir/scripts/members/syncyunohost-modules.php" --action=activate --modules=modAdherent,modCron,modSyncYunoHost --base_domain=$syncyunohost_base_domain --main_group=$syncyunohost_main_group --old_members=$syncyunohost_old_members
+    php "$install_dir/scripts/members/syncyunohost-modules.php" --action=activate --modules=modAdherent,modCron,modSyncYunoHost --base_domain=$syncyunohost_base_domain --main_group=$syncyunohost_main_group
 }
 syncyunohost_modules_deactivate(){
     ynh_script_progression --message="Deactive modSyncYunoHost ..." --weight=1
