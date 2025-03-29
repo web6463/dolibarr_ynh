@@ -49,7 +49,7 @@ syncyunohost_module_install(){
     if [ -d "../sources/extra_files/app/syncyunohost/" ]; then
         mkdir -p "$install_dir/htdocs/custom/syncyunohost/" # Ensure destination directory exists
         cp -r "../sources/extra_files/app/syncyunohost/"* "$install_dir/htdocs/custom/syncyunohost/"
-        chown dolibarr:www-data "$install_dir/htdocs/custom/syncyunohost/"
+        chown dolibarr:www-data -R "$install_dir/htdocs/custom/syncyunohost/"
         ynh_print_info --message="Files copied successfully to $install_dir/htdocs/custom/"
     else
         ynh_print_warn --message="Source directory ../sources/extra_files/app/syncyunohost/ does not exist. Skipping copy."
@@ -59,7 +59,7 @@ syncyunohost_module_install(){
     #=================================================
     ynh_script_progression --message="Copying syncyunohost-modules.php to dolibarr $install_dir/scripts/members directory ..." --weight=1
     cp "../conf/syncyunohost-modules.php" "$install_dir/scripts/members/syncyunohost-modules.php"
-    chown dolibarr:www-data "$install_dir/scripts/members/syncyunohost-modules.php"
+    chown dolibarr:www-data -R "$install_dir/scripts/members/syncyunohost-modules.php"
     #=================================================
     #=================================================
     # COPY SCRIPT TO /usr/local/bin
@@ -78,7 +78,6 @@ syncyunohost_module_install(){
     # Change ownership of the file to dolibarr after creation
     chown dolibarr:dolibarr /usr/local/bin/syncyunohost.sh
     chmod 750 /usr/local/bin/syncyunohost.sh
-    # Active modAdherent,modCron,modSyncYunoHost
 }
 syncyunohost_scripts_remove(){
     #=================================================
