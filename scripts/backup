@@ -37,6 +37,12 @@ ynh_print_info --message="Backing up the MySQL database..."
 ynh_mysql_dump_db --database="$db_name" > db.sql
 
 #=================================================
+# BACKUP CUSTOM SCRIPTS
+#=================================================
+ynh_print_info --message="Backing up syncyunohost.sh script from /usr/local/bin/..."
+ynh_backup --src_path="/usr/local/bin/syncyunohost.sh"
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
