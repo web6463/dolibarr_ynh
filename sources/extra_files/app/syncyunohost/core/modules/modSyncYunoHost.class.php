@@ -86,24 +86,46 @@ class modSyncYunoHost extends DolibarrModules
 
         // Add extra field 'synced_with_yunohost' to members
         $result1 = $extrafields->addExtraField(
-            'synced_with_yunohost',   // Field name
-            "Synced with YunoHost",   // Field label
-            'boolean',                // Field type
-            100,                        // Position
-            1,                        // Size
-            'adherent',               // Table (for members)
-            0,                        // Unique
-            0,                        // Required
-            0,                       // Default value
-            '',                       // No options
-            0,                        // Visible
-            '',                       // No specific page
-            0,                        // No indexing
-            0,                        // No encryption
-            '',                       // No field dependencies
-            '',                       // No filters
-            'syncyunohost@syncyunohost',      // Module name
-            'isModEnabled("syncyunohost")' // Condition for enabling
+            'dont_sync_with_yunohost',
+            "Don't sync with YunoHost",
+            'boolean',
+            100,
+            1,
+            'adherent',
+            0,
+            0,
+            0,
+            '',
+            1,
+            '',
+            3,
+            "Check this box if you do not want this member to be synchronized with YunoHost. When enabled, this user will be excluded from the synchronization process.",
+            '',
+            '',
+            'syncyunohost@syncyunohost',
+            'isModEnabled("syncyunohost")'
+        );
+        // Add extra field 'synced_with_yunohost' to members
+        $result2 = $extrafields->addExtraField(
+            'synced_with_yunohost',
+            "Synced with YunoHost",
+            'boolean',
+            101,
+            1,
+            'adherent',
+            0,
+            0,
+            0,
+            '',
+            1,
+            '',
+            5,
+            "",
+            '',
+            '',
+            'syncyunohost@syncyunohost',
+            'isModEnabled("syncyunohost")',
+
         );
         // Remove old permissions and reapply
         $this->remove($options);        
