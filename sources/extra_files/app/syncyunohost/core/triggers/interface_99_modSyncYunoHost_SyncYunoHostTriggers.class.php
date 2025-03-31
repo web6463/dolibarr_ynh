@@ -172,7 +172,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 
 		    // Update email if it has changed
 		    if ($object->oldcopy->email !== $object->email) {
-		        $this->runCommand('modify_email', $object->login, $object->email);
+		        $this->runCommand('modify_email', $object->login, $object->email, $object->oldcopy->email);
 		    }
 
 		    // Update full name if it has changed
