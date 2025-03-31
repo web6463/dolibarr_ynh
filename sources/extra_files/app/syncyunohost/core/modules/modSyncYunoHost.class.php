@@ -83,28 +83,6 @@ class modSyncYunoHost extends DolibarrModules
         // Initialize ExtraFields
         require_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
         $extrafields = new ExtraFields($this->db);
-
-        // Add extra field 'synced_with_yunohost' to members
-        $result1 = $extrafields->addExtraField(
-            'dont_sync_with_yunohost',
-            "Don't sync with YunoHost",
-            'boolean',
-            100,
-            1,
-            'adherent',
-            0,
-            0,
-            0,
-            '',
-            1,
-            '',
-            3,
-            "Check this box if you do not want this member to be synchronized with YunoHost. When enabled, this user will be excluded from the synchronization process.",
-            '',
-            '',
-            'syncyunohost@syncyunohost',
-            'isModEnabled("syncyunohost")'
-        );
         // Add extra field 'synced_with_yunohost' to members
         $result2 = $extrafields->addExtraField(
             'synced_with_yunohost',
