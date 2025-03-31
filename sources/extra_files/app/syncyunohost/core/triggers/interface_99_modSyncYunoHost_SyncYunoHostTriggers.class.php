@@ -28,6 +28,10 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	    // Retrieve YunoHost configuration values
 	    $yunohostBaseDomain = $conf->global->YUNOHOST_BASE_DOMAIN;
 	    $yunohostMainGroup = $conf->global->YUNOHOST_MAIN_GROUP;
+	    $check_dont_sync_with_yunohost = $this->check_dont_sync_with_yunohost($object);
+	    if($check_dont_sync_with_yunohost){
+	    	return 0;
+	    }	    
 	    $get_synced_with_yunohost = $this->get_synced_with_yunohost($object);
 	    // Handle actions using a switch statement
 	    switch ($action) {
@@ -90,6 +94,9 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	private function get_synced_with_yunohost($object) {
 	    return isset($object->array_options) ? ($object->array_options['options_synced_with_yunohost'] ?? 0) : 0;
 	}
+	private function check_dont_sync_with_yunohost($object) {
+	    return isset($object->array_options) ? ($object->array_options['options_dont_sync_with_yunohost'] ?? 0) : 0;
+	}
 	private function getFullName($object)
 	{
 	    // Generate full name based on company or personal name
@@ -147,7 +154,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	        $newPass = $this->generateSecurePassword(20);
 	        $create_output = $this->runCommand('create', $object->login, $newPass, $oldFullName, $object->oldcopy->email, $baseDomain);
 	        if ($this->check_user_created_or_exist($create_output, $object->login)) {
-		        $this->memberToUser($object->fk_adherent);
+		        $this->memberToUser($object->id);
 	           	$synced_with_yunohost = 1;
 	           	$this->updateMemberExtraField($object->id, 'synced_with_yunohost', 1);
 	        }
