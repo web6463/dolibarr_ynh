@@ -109,6 +109,10 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	{
 	    $member = new Adherent($this->db);
 	    if ($member->fetch($object->fk_adherent) > 0) {
+		    $check_dont_sync_with_yunohost = $this->check_dont_sync_with_yunohost($member);
+		    if($check_dont_sync_with_yunohost){
+		    	return 0;
+		    }		    	
 	    	$synced_with_yunohost = $this->get_synced_with_yunohost($member);
 	        if (!$synced_with_yunohost) {
 	            $fullName = $this->getFullName($member);
@@ -130,6 +134,10 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	{
 	    $member = new Adherent($this->db);
 	    if ($member->fetch($object->fk_adherent) > 0) {
+		    $check_dont_sync_with_yunohost = $this->check_dont_sync_with_yunohost($member);
+		    if($check_dont_sync_with_yunohost){
+		    	return 0;
+		    }
 	    	$synced_with_yunohost = $this->get_synced_with_yunohost($member);
 	        if (!$synced_with_yunohost) {
 	            $fullName = $this->getFullName($member);
