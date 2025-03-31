@@ -58,7 +58,7 @@ ynh_modify_user_forward_email() {
     fi
     # remove mailforward if provided
     if [ -n "$old_forward_email" ]; then
-        yunohost user update username --remove-mailforward "$old_forward_email" &>/dev/null 
+        yunohost user update "$USERNAME" --remove-mailforward "$old_forward_email" &>/dev/null 
     fi
 
     echo "Email $USERNAME updated."
