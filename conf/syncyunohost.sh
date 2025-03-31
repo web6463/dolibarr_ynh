@@ -124,7 +124,7 @@ case $ACTION in
             echo "Error: New Email is required."
             exit 1
         fi
-        ynh_modify_user_email "$PARAM1" "$PARAM2"
+        ynh_modify_user_forward_email "$PARAM1" "$PARAM2"
         ;;
     modify_fullname)
         if [ -z "$PARAM1" ]; then
