@@ -13,12 +13,6 @@ ynh_user_exists() {
     yunohost user list --output-as json | jq -e ".users | has(\"$1\")" &>/dev/null
 }
 
-# Helper function to remove a user from all groups
-remove_from_all_groups() {
-    local username="$1"
-    yunohost user group remove "$PARAM2" "$username" &>/dev/null
-}
-
 ynh_create_user() {
     local password="$1"
     local fullname="$2"
@@ -85,8 +79,7 @@ ynh_modify_user_password() {
 # Deactivate a user
 ynh_deactivate_user() {
     # Remove from all groups
-    remove_from_all_groups "$USERNAME"
-
+    yunohost user group remove "$PARAM2" "$USERNAME" &>/dev/null
     echo "User $USERNAME deactivated and removed from all groups."
 }
 
