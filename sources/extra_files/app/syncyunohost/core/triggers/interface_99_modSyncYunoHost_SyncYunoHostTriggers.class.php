@@ -30,6 +30,7 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	    $yunohostMainGroup = $conf->global->YUNOHOST_MAIN_GROUP;
 	    $check_dont_sync_with_yunohost = $this->check_dont_sync_with_yunohost($object);
 	    if($check_dont_sync_with_yunohost){
+	    	$this->removeSubDontSync($object, $yunohostBaseDomain, $yunohostMainGroup);
 	    	return 0;
 	    }	    
 	    // Handle actions using a switch statement
@@ -156,7 +157,13 @@ class InterfaceSyncYunoHostTriggers extends DolibarrTriggers
 	        }
 	    }
 	}
-
+	private function removeSubDontSync($object, $baseDomain, $mainGroup){
+		$synced_with_yunohost = $this->get_synced_with_yunohost($object);
+		if($synced_with_yunohost){
+			$this->runCommand('deactivate', $object->login, $baseDomain, $mainGroup);
+			$this->updateMemberExtraField($object->id, 'synced_with_yunohost', 0);
+		}
+	}
 	private function handleMemberModify($object, $baseDomain, $mainGroup)
 	{
 		$synced_with_yunohost = $this->get_synced_with_yunohost($object);
